@@ -18,8 +18,8 @@ export default {
 
 <script lang="ts" setup>
 
-let firstname = ref('流')
-let lastname = ref('光')
+let firstname = ref('summer')
+let lastname = ref('liuguang')
 
 let fullname = computed({
     get() {

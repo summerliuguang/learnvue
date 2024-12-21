@@ -25,14 +25,14 @@
 </template>
 
 <script lang="ts">
-    export default {
-        name: 'propsdetail'
-    }
+export default {
+    name: 'propsdetail'
+}
 </script>
 
 <script lang="ts" setup>
 
-    defineProps(['id','title','content'])
+defineProps(['id', 'title', 'content'])
 
 </script>
 <style scoped>

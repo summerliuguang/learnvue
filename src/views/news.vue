@@ -2,9 +2,9 @@
     <div>
         <ul>
             <li v-for="news in newsList" :key="news.id">
-                <!-- <RouterLink :to="`/news/newsarticle?title=${news.title}&content=${news.content}`">{{ news.title }}</RouterLink> -->
+                <!-- <RouterLink :to="`/news/querydetail?title=${news.title}&content=${news.content}`">{{ news.title }}</RouterLink> -->
                 <RouterLink :to="{
-                    path: '/news/newsarticle',
+                    path: '/news/querydetail',
                     query: {
                         id: news.id,
                         title: news.title,
@@ -47,7 +47,7 @@ export default {
 <script lang='ts' setup>
 
 const newsList = reactive([
-    { id: 'news01', title: '突发，这一千套房', content: '居然不用摇号了' },
+    { id: 'news01', title: '突发，这一千套房', content: '全部免费送' },
     { id: 'news02', title: '重要通知', content: '今天是周五' },
     { id: 'news03', title: '错过等一年', content: '明天就是冬至了' },
     { id: 'news04', title: '为什么流光不睡觉', content: '在学习vue' }
@@ -56,14 +56,14 @@ const newsList = reactive([
 const router = useRouter()
 
 interface NewsInter {
-    id:string,
-    title:string,
-    content:string
+    id: string,
+    title: string,
+    content: string
 }
-function shownews(news:NewsInter) {
+function shownews(news: NewsInter) {
     router.replace(
         {
-            path: '/news/newsarticle',
+            path: '/news/querydetail',
             query: {
                 id: news.id,
                 title: news.title,

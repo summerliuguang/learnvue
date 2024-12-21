@@ -25,17 +25,17 @@
 </template>
 
 <script lang="ts">
-    import { toRefs } from 'vue'
-    import { useRoute } from 'vue-router';
-    export default {
-        name: 'paramsdetail'
-    }
+import { toRefs } from 'vue'
+import { useRoute } from 'vue-router';
+export default {
+    name: 'paramsdetail'
+}
 </script>
 
 <script lang="ts" setup>
 
-    let route = useRoute()
-    let {params} = toRefs(route)
+let route = useRoute()
+let { params } = toRefs(route)
 
 
 </script>

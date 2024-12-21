@@ -3,7 +3,7 @@ import compute from './components/compute.vue';
 import watch from './components/person.vue';
 import main_header from '@/components/header.vue'
 import main_footer from '@/components/footer.vue'
-import newsarticle from '@/views/newsarticle.vue'
+import querydetail from '@/views/querydetail.vue'
 import displayarea from './components/displayarea.vue';
 import propsdetail from './views/propsdetail.vue';
 </script>
@@ -24,7 +24,7 @@ import propsdetail from './views/propsdetail.vue';
         <test />
         <test2 /> -->
         <propsdetail id="liuguang" title="冬眠不觉晓"/>
-        <newsarticle />
+        <querydetail />
         <propsdetail />
         <propsdetail />
         <propsdetail />

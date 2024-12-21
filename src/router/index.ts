@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import person from '@/components/person.vue'
 import news from '@/views/news.vue'
-import about from '@/views/about.vue'
-import newsarticle from '@/views/newsarticle.vue'
+import camera from '@/views/camera.vue'
+import querydetail from '@/views/querydetail.vue'
 import paramsdetail from '@/views/paramsdetail.vue'
 import propsdetail from '@/views/propsdetail.vue'
 
@@ -19,8 +19,8 @@ const router = createRouter({
             component: news,
             children: [
                 {
-                    path: 'newsarticle',
-                    component: newsarticle,
+                    path: 'querydetail',
+                    component: querydetail,
                     props(route){
                         return route.query
                     }
@@ -44,9 +44,9 @@ const router = createRouter({
             ]
         },
         {
-            name: 'guanyu',
-            path: '/about',
-            component: about
+            name: 'cameratest',
+            path: '/cameratest',
+            component: camera
         }
     ]
 })

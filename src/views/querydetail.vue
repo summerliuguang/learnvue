@@ -25,17 +25,17 @@
 </template>
 
 <script lang="ts">
-    import { toRefs } from 'vue'
-    import { useRoute } from 'vue-router';
-    export default {
-        name: 'newsarticle'
-    }
+import { toRefs } from 'vue'
+import { useRoute } from 'vue-router';
+export default {
+    name: 'querydetail'
+}
 </script>
 
 <script lang="ts" setup>
 
-    let route = useRoute()
-    let {query} = toRefs(route)
+let route = useRoute()
+let { query } = toRefs(route)
 
 
 </script>

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 
+// Options API
 /*
 export const usePersonStore = defineStore('person',
     {
@@ -19,6 +20,8 @@ export const usePersonStore = defineStore('person',
 )
 */
 
+// Composition API
+
 import { reactive, ref } from "vue"
 import { v4 as uuidv4 } from 'uuid'
 import axios from "axios"
@@ -34,11 +37,10 @@ export const usePersonStore = defineStore('person', () => {
 
     async function getTalk() {
         let { data: { content } } = await axios.get('https://v1.jinrishici.com/all.json')
-        // let result =await axios.get('https://api2.ctfmall.com/gateway//ctfmall-common2-server/common/todayGoldPrice')
-
         let obj = { id: uuidv4(), content: content }
         talkList.unshift(obj)
     }
+
     return { name, age, talkList, plus, getTalk }
 }
 )
