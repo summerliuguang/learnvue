@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { createPinia } from 'pinia'
-// import 'default-passive-events'
+import 'default-passive-events'
 
 const app = createApp(App)
 const pinia = createPinia()

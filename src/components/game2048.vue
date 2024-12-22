@@ -1,27 +1,30 @@
 <template>
-    <h1>2048 游戏</h1>
-    <div class="score">得分: {{ score }}</div>
+
     <div class="game-container" ref="gameContainer">
-    </div>
-    <div class="buttons">
+        <h1>2048 游戏</h1>
+        <div class="score">得分: {{ score }}</div>
+        <div class="grid-container">
+            <div v-for="(value, index) in grid.flat()" :key="index" class="tile" :class="'tile-' + value">
+                {{ value || '' }}
+            </div>
+        </div>
         <button @click="saveGame">保存游戏</button>
         <button @click="loadGame">加载游戏</button>
     </div>
+
 </template>
 
 <script lang='ts' setup name='game2048'>
 
-import { ref,reactive,onMounted,onUnmounted} from 'vue'
+import { ref, reactive, onMounted ,onBeforeUnmount} from 'vue'
+
 const gameContainer = ref()
 let score = ref(0)
-
 let grid = reactive(Array.from({ length: 4 }, () => Array(4).fill(0)))
-
 // 初始化游戏
 function initGame() {
     addNewTile();
     addNewTile();
-    updateGrid();
 }
 
 // 添加新数字块
@@ -38,23 +41,18 @@ function addNewTile() {
     }
 }
 
-// 更新游戏界面
-function updateGrid() {
-
-}
-
 // 滑动并合并
 function slideAndCombine(row: number[]) {
-    row = row.filter(num => num !== 0); // 移除所有 0
-    for (let i = 0; i < row.length - 1; i++) {
-        if (row[i] === row[i + 1]) {
-            row[i] *= 2;
-            row[i + 1] = 0;
+    const newRow = row.filter(num => num !== 0);
+    for (let i = 0; i < newRow.length - 1; i++) {
+        if (newRow[i] === newRow[i + 1]) {
+            newRow[i] *= 2;
+            newRow[i + 1] = 0;
+            score.value += newRow[i];
         }
     }
-    row = row.filter(num => num !== 0); // 再次移除所有 0
-    while (row.length < 4) row.push(0); // 补齐为 4 个元素
-    return row;
+    const mergedRow = newRow.filter(num => num !== 0);
+    return mergedRow.concat(Array(4 - mergedRow.length).fill(0));
 }
 
 // 处理向左滑动
@@ -94,7 +92,10 @@ function moveDown() {
 }
 
 // 处理用户输入
-const control = (e: KeyboardEvent) => {
+const handlekey = (e: KeyboardEvent) => {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault(); // 阻止默认的滚动行为
+      }
     switch (e.key) {
         case 'ArrowLeft':
             moveLeft();
@@ -112,7 +113,6 @@ const control = (e: KeyboardEvent) => {
             return;
     }
     addNewTile();
-    updateGrid();
 }
 
 let touchStartX = 0;
@@ -141,14 +141,13 @@ const handleTouchEnd = (e: TouchEvent) => {
         }
     }
     addNewTile();
-    updateGrid();
 }
 
 // 保存游戏状态到 localStorage
 function saveGame() {
     const gameState = {
         grid: grid,
-        score: score
+        score: score.value
     };
     localStorage.setItem('2048-game', JSON.stringify(gameState));
     alert('游戏已保存！');
@@ -160,23 +159,23 @@ function loadGame() {
     if (savedState) {
         const gameState = JSON.parse(savedState);
         grid = gameState.grid;
-        score = gameState.score;
-        updateGrid();
+        score.value = gameState.score;
         alert('游戏已加载！');
     } else {
         alert('没有找到已保存的游戏！');
     }
 }
 
-initGame();
+
 onMounted(() => {
-    window.addEventListener('keydown', control);
+    window.addEventListener('keydown', handlekey);
     gameContainer.value.addEventListener('touchstart', handleTouchStart);
     gameContainer.value.addEventListener('touchend', handleTouchEnd);
+    initGame();
 });
 
-onUnmounted(() => {
-    window.removeEventListener('keydown', control);
+onBeforeUnmount(() => {
+    window.removeEventListener('keydown', handlekey);
     gameContainer.value.removeEventListener('touchstart', handleTouchStart);
     gameContainer.value.removeEventListener('touchend', handleTouchEnd);
 });
@@ -195,20 +194,20 @@ body {
 }
 
 h1 {
-    margin-bottom: 5vh;
     color: #776e65;
 }
 
-#game-container {
+.game-container {
     text-align: center;
 }
 
-#score {
-    font-size: 5vw;
-    margin-bottom: 5vw;
+.score {
+    text-align: right;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-#buttons {
+buttons {
     text-align: center;
     margin-top: 5vw;
 }
@@ -217,10 +216,10 @@ button {
     background-color: #8f7a66;
     color: #f9f6f2;
     border: none;
-    padding: 4vw;
+    padding: 40px;
     margin: 5px;
     cursor: pointer;
-    font-size: 5vw;
+    font-size: 16px;
     border-radius: 2vw;
 }
 
@@ -228,36 +227,31 @@ button:hover {
     background-color: #9e8b76;
 }
 
-#grid-container {
+.grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* 每列均分 */
     grid-template-rows: repeat(4, 1fr);
-    /* 每行均分 */
     aspect-ratio: 1;
-    /* 保证容器宽高比为1:1 */
-    gap: 1vw;
-    /* 设置单元格间距 */
+    gap: 10px;
     background-color: #bbada0;
-    padding: 1vw;
-    border-radius: 1vw;
+    padding: 10px;
+    border-radius: 10px;
     width: 80vw;
-    /* 动态宽度 */
-
-    max-width: 500px;
-    /* 限制最大宽度 */
+    max-width: 600px;
+    min-width: 500px;
 }
 
 .tile {
+    width: 100%;
+    height: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    font-weight: bold;
-    border-radius: 10%;
+    align-items: center;
     background-color: #cdc1b4;
+    border-radius: 10px;
+    font-size: 300%;
+    font-weight: bold;
     color: #776e65;
-    transition: all 0.1s ease-in-out;
 }
 
 .tile-2 {
