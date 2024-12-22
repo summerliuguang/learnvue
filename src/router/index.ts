@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import mainhomepage from '@/views/mainhomepage.vue'
 import gamepage from '@/views/gamepage.vue'
-import toolpage from '@/views/toolPage.vue'
+import toolpage from '@/views/toolpage.vue'
 import investigatepage from '@/views/investigatepage.vue'
 import camera from '@/components/camera.vue'
 import poemlist from '@/views/poemlist.vue'
