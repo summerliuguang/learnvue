@@ -1,10 +1,11 @@
 <template>
+    <div class="newscontainer">
     <div>
         <ul>
             <li v-for="news in newsList" :key="news.id">
-                <!-- <RouterLink :to="`/news/querydetail?title=${news.title}&content=${news.content}`">{{ news.title }}</RouterLink> -->
+                <!-- <RouterLink :to="`/investigate/news/querydetail?title=${news.title}&content=${news.content}`">{{ news.title }}</RouterLink> -->
                 <RouterLink :to="{
-                    path: '/news/querydetail',
+                    path: '/investigate/news/querydetail',
                     query: {
                         id: news.id,
                         title: news.title,
@@ -13,7 +14,7 @@
                 }">
                     {{ news.title }}
                 </RouterLink>
-                <!-- <RouterLink :to="`/news/paramsdetail/${news.id}/${news.title}/${news.content}`">
+                <!-- <RouterLink :to="`/investigate/news/paramsdetail/${news.id}/${news.title}/${news.content}`">
                     {{ news.title }}
                 </RouterLink> -->
                 <!-- <RouterLink :to="{
@@ -33,18 +34,13 @@
     <div class="newcontent">
         <RouterView></RouterView>
     </div>
-
+</div>
 </template>
 
-<script lang='ts'>
+<script lang='ts' setup name='news'>
+
 import { onMounted, onUnmounted, reactive } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router';
-export default {
-    name: 'news'
-}
-</script>
-
-<script lang='ts' setup>
 
 const newsList = reactive([
     { id: 'news01', title: '突发，这一千套房', content: '全部免费送' },
@@ -63,7 +59,7 @@ interface NewsInter {
 function shownews(news: NewsInter) {
     router.replace(
         {
-            path: '/news/querydetail',
+            path: '/investigate/news/querydetail',
             query: {
                 id: news.id,
                 title: news.title,
@@ -75,6 +71,14 @@ function shownews(news: NewsInter) {
 </script>
 
 <style scoped>
+.newscontainer {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
 li {
     min-width: 200px;
     list-style-type: none;

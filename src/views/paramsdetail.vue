@@ -24,21 +24,15 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup name="paramsdetail">
+
 import { toRefs } from 'vue'
 import { useRoute } from 'vue-router';
-export default {
-    name: 'paramsdetail'
-}
-</script>
-
-<script lang="ts" setup>
-
 let route = useRoute()
 let { params } = toRefs(route)
 
-
 </script>
+
 <style scoped>
 .article-container {
     display: flex;

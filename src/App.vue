@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import compute from './components/compute.vue';
-import watch from './components/person.vue';
 import main_header from '@/components/header.vue'
-import main_footer from '@/components/footer.vue'
-import querydetail from '@/views/querydetail.vue'
-import displayarea from './components/displayarea.vue';
-import propsdetail from './views/propsdetail.vue';
+import webfooter from './components/webfooter.vue';
+import { RouterView } from 'vue-router';
 </script>
 
 <template>
@@ -15,24 +11,12 @@ import propsdetail from './views/propsdetail.vue';
       <main_header />
     </header>
     <main>
-      <div class="display">
-        <displayarea />
-      </div>
       <div class="main_content">
-        <!-- <watch a="liuguang" />
-        <compute />
-        <test />
-        <test2 /> -->
-        <propsdetail id="liuguang" title="冬眠不觉晓"/>
-        <querydetail />
-        <propsdetail />
-        <propsdetail />
-        <propsdetail />
-        <propsdetail />
+        <RouterView />
       </div>
     </main>
     <footer>
-      <main_footer />
+      <webfooter />
     </footer>
   </body>
 </template>
@@ -42,7 +26,6 @@ export default {
   name: 'App'
 }
 </script>
-
 
 <style scoped>
 body {
@@ -64,15 +47,15 @@ footer {
 
 .main_content {
   flex: 1;
+  flex-grow: 1;
   max-width: 1440px;
   min-width: 480px;
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: 20px;
   margin: 0px auto;
-  padding: 20px;
-  /* background-color: greenyellow; */
   justify-content: space-evenly;
   align-content: space-around;
 }

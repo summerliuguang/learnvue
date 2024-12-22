@@ -24,13 +24,7 @@
     </div>
 </template>
 
-<script lang="ts">
-export default {
-    name: 'propsdetail'
-}
-</script>
-
-<script lang="ts" setup>
+<script lang="ts" setup name="propsdetail">
 
 defineProps(['id', 'title', 'content'])
 

@@ -4,32 +4,18 @@
             <h1>夏日流光的个人网站</h1>
             <p>夏日流光</p>
             <nav>
-                <a href="#">首页</a>
-                <a href="#">文章</a>
+                <RouterLink to="/home" active-class="active">首页</RouterLink>
+                <RouterLink :to="{name:'investigate'}" active-class="active">探索</RouterLink>
+                <RouterLink :to="{path:'/game'}" active-class="active">游戏</RouterLink>
+                <RouterLink :to="{path:'/tool'}" active-class="active">工具</RouterLink>
             </nav>
         </div>
         <div class="backimg"></div>
     </header>
 </template>
 
-<script lang="ts">
-import { ref } from 'vue'
-export default {
-    name: 'main_header'
-}
-</script>
-
-<script lang="ts" setup>
-
-let name = ref('bruce')
-let age = ref(18)
-
-function changeName() {
-    name.value = 'ss'
-}
-function changeAge() {
-    age.value++
-}
+<script lang="ts" setup name='header'>
+import { RouterLink } from 'vue-router';
 </script>
 
 <style scoped>

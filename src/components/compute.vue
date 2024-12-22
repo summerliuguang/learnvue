@@ -7,16 +7,9 @@
     </div>
 </template>
 
+<script lang="ts" setup name='compute'>
 
-
-<script lang="ts">
 import { ref, reactive, computed } from 'vue'
-export default {
-    name: 'compute'
-}
-</script>
-
-<script lang="ts" setup>
 
 let firstname = ref('summer')
 let lastname = ref('liuguang')
@@ -34,7 +27,7 @@ let fullname = computed({
     }
 })
 function changeName() {
-    fullname.value='li-si'
+    fullname.value = 'li-si'
 }
 console.log(fullname.value)
 </script>

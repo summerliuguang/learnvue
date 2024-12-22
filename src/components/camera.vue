@@ -14,15 +14,9 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts" name="camera">
+
 import { ref, onMounted, onUnmounted, watch } from 'vue';
-export default {
-  name: 'Camera',
-}
-</script>
-
-<script setup lang="ts">
-
 const video = ref<HTMLVideoElement | null>(null);
 const selectedCameraId = ref<string>(''); // 当前选中的摄像头ID
 const cameras = ref<{ deviceId: string, label: string }[]>([]); // 存储可用摄像头列表

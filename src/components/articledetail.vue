@@ -2,7 +2,7 @@
     <div class="article-container">
         <article class="article">
             <header>
-                <h2>{{ route.query.title }}</h2>
+                <h2>{{ title }}</h2>
                 <div class="tags">
                     <span>#测试</span>
                     <span>#动漫</span>
@@ -11,7 +11,7 @@
                 </div>
             </header>
             <div class="content">
-                {{ query.content }}
+                {{ content }}
             </div>
             <footer class="article-footer">
                 <span>liuguang</span>
@@ -24,12 +24,12 @@
     </div>
 </template>
 
-<script lang="ts" setup name="querydetail">
-import { toRefs } from 'vue'
-import { useRoute } from 'vue-router';
-let route = useRoute()
-let { query } = toRefs(route)
+<script lang="ts" setup name="articledetail">
 
+import { ref } from 'vue'
+
+let title = ref('冬眠不觉晓')
+let content = ref('冬眠不觉晓，冷月伴清宵。枝影霜华覆，梦中听鹊噪。寒梅开暗香，飞雪映山腰。待到春雷动，心随新绿飘。')
 
 </script>
 <style scoped>
@@ -41,6 +41,7 @@ let { query } = toRefs(route)
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     width: 390px;
     max-width: 460px;
+    max-height: 300px;
     aspect-ratio: 16/10;
     overflow: hidden;
     flex-grow: 1;
