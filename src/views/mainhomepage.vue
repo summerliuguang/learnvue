@@ -15,12 +15,19 @@ import articledetail from '@/components/articledetail.vue';
 
 <style scoped>
 .mainhomepage {
-    flex:1;
+    flex: 1;
     flex-grow: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
     padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .mainhomepage {
+        flex-direction: column;
+    }
+
 }
 </style>

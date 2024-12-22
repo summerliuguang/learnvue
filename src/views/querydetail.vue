@@ -121,4 +121,32 @@ let { query } = toRefs(route)
 .article-image img:hover {
     height: 105%;
 }
+@media screen and (max-width: 768px) {
+    .article-container {
+        width: 280px;
+        max-width: 600px;
+        ;
+        aspect-ratio: 16/10;
+    }
+
+    .article .content {
+        -webkit-line-clamp: 2;
+    }
+
+    .tags span {
+        font-size: 0.2em;
+    }
+
+    .article h2 {
+        font-size: 1em;
+    }
+
+    .article .content {
+        font-size: 0.5em;
+    }
+
+    .article-footer {
+        font-size: 0.2em;
+    }
+}
 </style>

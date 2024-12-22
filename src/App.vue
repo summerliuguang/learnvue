@@ -59,4 +59,12 @@ footer {
   justify-content: space-evenly;
   align-content: space-around;
 }
+
+@media screen and (max-width: 768px) {
+  .main_content {
+    padding: 0 20px;
+    min-width: 250px;
+    box-sizing: border-box;
+}
+}
 </style>

@@ -122,4 +122,32 @@ let content = ref('冬眠不觉晓，冷月伴清宵。枝影霜华覆，梦中�
 .article-image img:hover {
     height: 105%;
 }
+
+@media screen and (max-width: 768px) {
+    .article-container {
+        width: 280px;
+        max-width: 600px;
+        aspect-ratio: 16/10;
+    }
+
+    .article .content {
+        -webkit-line-clamp: 2;
+    }
+
+    .tags span {
+        font-size:10px ;
+    }
+
+    .article h2 {
+        font-size: 1em;
+    }
+
+    .article .content {
+        font-size: 0.5em;
+    }
+
+    .article-footer {
+        font-size: 0.2em;
+    }
+}
 </style>

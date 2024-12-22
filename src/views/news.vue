@@ -117,4 +117,19 @@ a:hover {
 .shownews:hover {
     scale: 110%;
 }
+
+@media screen and (max-width: 768px) {
+    .newscontainer {
+        flex-direction: column;
+    }
+    .newcontent {
+        margin-left: 0;
+    }
+
+    .shownews {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+    
+}
 </style>

@@ -1,7 +1,9 @@
 <template>
     <div class="poemcontainer">
-        <button @click="personStore.getTalk">获取一句古诗</button>
-        <button @click="clearTalk">清空</button>
+        <div class="buttonrow">
+            <button @click="personStore.getTalk">获取一句古诗</button>
+            <button @click="clearTalk">清空</button>
+        </div>
         <div class="poemlist">
             <ul>
                 <li v-for="key in talkList" :key="key.id">{{ key.content }} </li>
@@ -52,13 +54,40 @@ button {
     column-count: 3;
     column-width: 300px;
     height: 100%;
+    margin-bottom: 50px;
 }
-ul {
-}
+
 
 li {
     padding: 10px;
     font-size: 20px;
     color: #555;
+}
+
+@media screen and (max-width: 768px) {
+    .poemcontainer {
+        padding-left: 0;
+    }
+
+    .poemlist {
+        margin-left: 20px;
+        column-count: 1;
+        column-width: 100%;
+    }
+    .buttonrow {
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        width: 100px;
+        margin: 10px 5px;
+        font-size: 0.8em;
+    }
+
+    li {
+        font-size: 1em;
+        padding: 5px;
+    }
+
 }
 </style>

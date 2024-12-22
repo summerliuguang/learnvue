@@ -121,6 +121,11 @@ let touchStartY = 0;
 const handleTouchStart = (e: TouchEvent) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
+    const touchStartElement = document.elementFromPoint(touchStartX, touchStartY);
+    const gridContainer = document.querySelector('.grid-container');
+    if (gridContainer && gridContainer.contains(touchStartElement)) {
+        e.preventDefault();
+    }
 }
 const handleTouchEnd = (e: TouchEvent) => {
     const touchEndX = e.changedTouches[0].clientX;
@@ -319,5 +324,23 @@ button:hover {
     background-color: #2d7405;
     color: #f9f6f2;
     font-size: 3vw;
+}
+
+@media screen and (max-width: 768px) {
+    .grid-container {
+        width: 80vw;
+        min-width: 300px;
+    }
+
+    .tile {
+        font-size: 200%;
+    }
+
+    button {
+        padding: 20px;
+        font-size: 14px;
+        border-radius: 5vw;
+    }
+    
 }
 </style>

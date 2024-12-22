@@ -15,7 +15,7 @@
 </template>
 
 <script lang='ts' setup name='investigatepage'>
-import { RouterView,useRouter } from 'vue-router';
+import { RouterView, useRouter } from 'vue-router';
 const router = useRouter()
 function routeTo(path: string) {
     router.push(path)
@@ -60,5 +60,23 @@ button:hover {
     background-color: white;
     flex: 1;
     flex-grow: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        min-width: 50px;
+        width: 100px;
+
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    button {
+        font-size: 0.8em;
+        height: 24px;
+    }
+
 }
 </style>
