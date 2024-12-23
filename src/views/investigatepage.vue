@@ -64,9 +64,8 @@ button:hover {
 
 @media screen and (max-width: 768px) {
     .nav {
-        min-width: 50px;
+        min-width: 60px;
         width: 100px;
-
     }
 
     h2 {

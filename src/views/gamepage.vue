@@ -9,4 +9,10 @@ import { RouterView } from 'vue-router';
 </script>
 
 <style scoped>
+.gamecontainer {
+    flex: 1;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+}
 </style>

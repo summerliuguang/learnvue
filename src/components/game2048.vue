@@ -3,7 +3,8 @@
     <div class="game-container" ref="gameContainer">
         <h1>2048 游戏</h1>
         <div class="score">得分: {{ score }}</div>
-        <div class="grid-container" ref="touchArea" @touchstart="handleTouchStart" @touchend="handleTouchEnd" @touchmove.prevent >
+        <div class="grid-container" ref="touchArea" @touchstart="handleTouchStart" @touchend="handleTouchEnd"
+            @touchmove.prevent>
             <div v-for="(value, index) in grid.flat()" :key="index" class="tile" :class="'tile-' + value">
                 {{ value || '' }}
             </div>
@@ -16,7 +17,7 @@
 
 <script lang='ts' setup name='game2048'>
 
-import { ref, reactive, onMounted ,onBeforeUnmount} from 'vue'
+import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 
 const gameContainer = ref()
 let score = ref(0)
@@ -96,7 +97,7 @@ function moveDown() {
 const handlekey = (e: KeyboardEvent) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
         e.preventDefault(); // 阻止默认的滚动行为
-      }
+    }
     switch (e.key) {
         case 'ArrowLeft':
             moveLeft();
@@ -118,7 +119,7 @@ const handlekey = (e: KeyboardEvent) => {
 
 let touchStartX = 0;
 let touchStartY = 0;
-const moveThreshold = 30;
+const moveThreshold = 10;
 
 const handleTouchStart = (e: TouchEvent) => {
     e.preventDefault();
@@ -185,22 +186,17 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #faf8ef;
-    font-family: 'Arial', sans-serif;
+
+.main_content {
+    touch-action: none;
+}
+.game-container {
+    text-align: center;
     touch-action: none;
 }
 
 h1 {
     color: #776e65;
-}
-
-.game-container {
-    text-align: center;
 }
 
 .score {
@@ -326,8 +322,8 @@ button:hover {
 
 @media screen and (max-width: 768px) {
     .grid-container {
-        width: 80vw;
-        min-width: 300px;
+        max-width: 400px;
+        min-width: 200px;
     }
 
     .tile {
@@ -339,6 +335,5 @@ button:hover {
         font-size: 14px;
         border-radius: 5vw;
     }
-    
 }
 </style>

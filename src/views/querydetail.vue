@@ -123,9 +123,8 @@ let { query } = toRefs(route)
 }
 @media screen and (max-width: 768px) {
     .article-container {
-        width: 280px;
+        width: 260px;
         max-width: 600px;
-        ;
         aspect-ratio: 16/10;
     }
 

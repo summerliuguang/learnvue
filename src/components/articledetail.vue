@@ -86,13 +86,13 @@ let content = ref('冬眠不觉晓，冷月伴清宵。枝影霜华覆，梦中�
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 1.1em;
-    line-height: 1.5;
     padding: 4px;
     box-sizing: border-box;
     border-radius: 8px;
     text-align: center;
     margin: auto 0;
+    line-height: 1.5;
+    height: 4.5em;
 }
 
 .article .content:hover {
@@ -132,22 +132,24 @@ let content = ref('冬眠不觉晓，冷月伴清宵。枝影霜华覆，梦中�
 
     .article .content {
         -webkit-line-clamp: 2;
+        line-height: 1.5;
+        height: 3em;
     }
 
     .tags span {
-        font-size:10px ;
+        font-size: 10px;
     }
 
     .article h2 {
-        font-size: 1em;
+        font-size: 16px;
     }
 
     .article .content {
-        font-size: 0.5em;
+        font-size: 12px;
     }
 
     .article-footer {
-        font-size: 0.2em;
+        font-size: 8px;
     }
 }
 </style>

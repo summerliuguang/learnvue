@@ -27,7 +27,7 @@
                 }">
                     {{ news.title }}
                 </RouterLink> -->
-                <button class="shownews" @click="shownews(news)">查看</button>
+                <button  type="button" class="shownews" @click="shownews(news)">查看</button>
             </li>
         </ul>
     </div>
@@ -85,6 +85,7 @@ li {
     margin: 10px 0;
     display: flex;
     justify-content: space-between;
+    align-items:center;
 }
 
 a {
@@ -128,7 +129,6 @@ a:hover {
 
     .shownews {
         margin-left: 0;
-        margin-top: 8px;
     }
     
 }
