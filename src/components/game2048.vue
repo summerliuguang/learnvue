@@ -3,7 +3,7 @@
     <div class="game-container" ref="gameContainer">
         <h1>2048 游戏</h1>
         <div class="score">得分: {{ score }}</div>
-        <div class="grid-container">
+        <div class="grid-container" ref="touchArea" @touchstart="handleTouchStart" @touchend="handleTouchEnd" @touchmove.prevent >
             <div v-for="(value, index) in grid.flat()" :key="index" class="tile" :class="'tile-' + value">
                 {{ value || '' }}
             </div>
@@ -21,6 +21,7 @@ import { ref, reactive, onMounted ,onBeforeUnmount} from 'vue'
 const gameContainer = ref()
 let score = ref(0)
 let grid = reactive(Array.from({ length: 4 }, () => Array(4).fill(0)))
+const touchArea = ref()
 // 初始化游戏
 function initGame() {
     addNewTile();
@@ -117,21 +118,21 @@ const handlekey = (e: KeyboardEvent) => {
 
 let touchStartX = 0;
 let touchStartY = 0;
+const moveThreshold = 30;
 
 const handleTouchStart = (e: TouchEvent) => {
+    e.preventDefault();
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
-    const touchStartElement = document.elementFromPoint(touchStartX, touchStartY);
-    const gridContainer = document.querySelector('.grid-container');
-    if (gridContainer && gridContainer.contains(touchStartElement)) {
-        e.preventDefault();
-    }
 }
+
 const handleTouchEnd = (e: TouchEvent) => {
+    e.preventDefault();
     const touchEndX = e.changedTouches[0].clientX;
     const touchEndY = e.changedTouches[0].clientY;
     const diffX = touchEndX - touchStartX;
     const diffY = touchEndY - touchStartY;
+    if (Math.abs(diffX) < moveThreshold && Math.abs(diffY) < moveThreshold) return;
     if (Math.abs(diffX) > Math.abs(diffY)) {
         if (diffX > 0) {
             moveRight();
@@ -174,15 +175,11 @@ function loadGame() {
 
 onMounted(() => {
     window.addEventListener('keydown', handlekey);
-    gameContainer.value.addEventListener('touchstart', handleTouchStart);
-    gameContainer.value.addEventListener('touchend', handleTouchEnd);
     initGame();
 });
 
 onBeforeUnmount(() => {
     window.removeEventListener('keydown', handlekey);
-    gameContainer.value.removeEventListener('touchstart', handleTouchStart);
-    gameContainer.value.removeEventListener('touchend', handleTouchEnd);
 });
 
 </script>
@@ -244,6 +241,7 @@ button:hover {
     width: 80vw;
     max-width: 600px;
     min-width: 500px;
+    touch-action: none;
 }
 
 .tile {
