@@ -7,25 +7,29 @@
                     <img class="avatarimg" ref="avatarimg" alt="头像" />
                 </span>
                 <span>
-                    <img class="uploadimg" src="/src/resources/upload.svg" alt="默认头像" />
+                    <img class="uploadimg" @click="uploadAvatar" src="/src/resources/upload.svg" alt="点击上传头像"
+                        role="button" />
+                    <input type="file" ref="uploadInput" name="avatar" style="display: none;" accept="image/*"
+                        @change="avatarUploaded" />
                 </span>
             </div>
-            <div class="account">
+            <fieldset class="account">
                 <label>账号：{{ userdata.account }}</label>
-            </div>
-            <div class="nickname">
+            </fieldset>
+            <fieldset class="nickname">
                 <label for="nickname">昵称：</label>
                 <input type="text" name="nickname" @input="validateNickname" v-model="userdata.nickname" />
                 <label v-if="nicknameError" class="error-msg">{{ nicknameError }}</label>
-            </div>
-            <div class="birthday">
+            </fieldset>
+            <fieldset class="birthday">
                 <label for="birthday">出生日期：</label>
-                <input type="date" id="birthday" @input="validateBirthday" v-model="userdata.birthday" />
+                <input type="date" id="birthday" name="birthday" @input="validateBirthday"
+                    v-model="userdata.birthday" />
                 <label v-if="birthdayError" class="error-msg">{{ birthdayError }}</label>
-            </div>
-            <div class="submit">
+            </fieldset>
+            <fieldset class="submit">
                 <button type="submit">提交</button>
-            </div>
+            </fieldset>
         </form>
     </div>
 </template>
@@ -38,20 +42,47 @@ import axios from 'axios';
 
 const personStore = usePersonStore();
 let avatarimg = ref();
+let uploadInput = ref();
 let userdata = reactive({
     account: "",
     avatar: "",
-    nickname: "liuguang",
-    birthday: "1991-12-21",
+    nickname: "",
+    birthday: "",
 });
 
 function requestUserData() {
     userdata.account = "summer";
-    userdata.avatar = "/src/resources/avatar.jpg";
+    userdata.avatar = "";
     userdata.nickname = "liuguang";
     userdata.birthday = "1997-12-21";
     avatarimg.value.src = userdata.avatar;
 }
+
+function avatarUploaded(e: Event) {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (!file) {
+        console.warn('未选择文件');
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        if (typeof e.target?.result === 'string') {
+            userdata.avatar = e.target.result;
+            avatarimg.value.src = e.target.result;
+            console.log('头像上传成功');
+        }
+    };
+    reader.onerror = () => {
+        console.error('文件读取失败');
+    };
+    reader.readAsDataURL(file);
+}
+
+function uploadAvatar() {
+    // 触发文件选择框
+    uploadInput.value.click();
+}
+
 
 // 用于存储验证错误信息的响应式变量
 const nicknameError = ref('');
@@ -92,15 +123,33 @@ const handleSubmit = async () => {
     if (!validateNickname() || !validateBirthday()) {
         return;
     }
-    try {
-        console.log('提交的用户数据：', userdata);
-    } catch (error) {
-        console.error('表单提交出现错误：', error);
+
+    const formData = new FormData();
+    formData.append('nickname', userdata.nickname);
+    formData.append('birthday', userdata.birthday);
+
+    const file = uploadInput.value.files?.[0];
+    if (file) {
+        formData.append('avatar', file);
     }
+
+    axios.post('http://localhost:3000/upload', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    }).then(res => {
+        console.log('提交成功：', res.data);
+    }).catch(error => {
+        console.error('提交失败：', error);
+    });
+
 };
 
 onMounted(() => {
     requestUserData();
+    if (!userdata.avatar) {
+        avatarimg.value.src = "/src/resources/avatar.jpg";
+    }
 });
 
 </script>
@@ -129,9 +178,10 @@ h2 {
     gap: 8px;
 }
 
-.profileform div {
+.profileform fieldset {
     display: flex;
     flex-direction: column;
+    border: none;
 }
 
 .avatar {
@@ -140,6 +190,7 @@ h2 {
     height: 64px;
     margin: 0 auto;
 }
+
 .avatar .avatarimg {
     position: absolute;
     width: 64px;
@@ -173,7 +224,7 @@ button {
     border-radius: 5px;
     box-sizing: border-box;
     border: none;
-    font-family: yahei;
+    font-family: 'Microsoft YaHei', sans-serif;
 }
 
 input {
