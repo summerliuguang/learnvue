@@ -1,10 +1,9 @@
 <template>
 
-    <div class="game-container" ref="gameContainer">
+    <div class="game-container" ref="gameContainer" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
         <h1>2048 游戏</h1>
         <div class="score">得分: {{ score }}</div>
-        <div class="grid-container" ref="touchArea" @touchstart="handleTouchStart" @touchend="handleTouchEnd"
-            @touchmove.prevent>
+        <div class="grid-container">
             <div v-for="(value, index) in grid.flat()" :key="index" class="tile" :class="'tile-' + value">
                 {{ value || '' }}
             </div>
@@ -22,7 +21,7 @@ import { ref, reactive, onMounted, onBeforeUnmount } from 'vue'
 const gameContainer = ref()
 let score = ref(0)
 let grid = reactive(Array.from({ length: 4 }, () => Array(4).fill(0)))
-const touchArea = ref()
+
 // 初始化游戏
 function initGame() {
     addNewTile();
@@ -122,19 +121,17 @@ let touchStartY = 0;
 const moveThreshold = 10;
 
 const handleTouchStart = (e: TouchEvent) => {
-    e.preventDefault();
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
 }
 
 const handleTouchEnd = (e: TouchEvent) => {
-    e.preventDefault();
     const touchEndX = e.changedTouches[0].clientX;
     const touchEndY = e.changedTouches[0].clientY;
     const diffX = touchEndX - touchStartX;
     const diffY = touchEndY - touchStartY;
     if (Math.abs(diffX) < moveThreshold && Math.abs(diffY) < moveThreshold) return;
-    if (Math.abs(diffX) > Math.abs(diffY)) {
+    if (Math.abs(diffX) >= Math.abs(diffY)) {
         if (diffX > 0) {
             moveRight();
         } else {
@@ -186,10 +183,10 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped>
-
 .main_content {
     touch-action: none;
 }
+
 .game-container {
     text-align: center;
     touch-action: none;
