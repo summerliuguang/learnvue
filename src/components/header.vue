@@ -5,9 +5,9 @@
             <p>夏日流光</p>
             <nav>
                 <RouterLink to="/home" active-class="active">首页</RouterLink>
-                <RouterLink :to="{name:'investigate'}" active-class="active">探索</RouterLink>
-                <RouterLink :to="{path:'/game'}" active-class="active">游戏</RouterLink>
-                <RouterLink :to="{path:'/tool'}" active-class="active">工具</RouterLink>
+                <RouterLink :to="{ name: 'investigate' }" active-class="active">探索</RouterLink>
+                <RouterLink :to="{ path: '/game' }" active-class="active">游戏</RouterLink>
+                <RouterLink :to="{ path: '/tool' }" active-class="active">工具</RouterLink>
             </nav>
         </div>
         <div class="backimg"></div>
@@ -19,11 +19,11 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <style scoped>
-
 * {
-    color:whitesmoke;
+    color: whitesmoke;
     text-shadow: 2px 2px 5px black;
 }
+
 .nav-header {
     text-align: center;
     width: 100%;

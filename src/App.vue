@@ -65,6 +65,6 @@ footer {
     padding: 0 20px;
     min-width: 250px;
     box-sizing: border-box;
-}
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="toolcontainer">
-        <RouterView/>
+        <RouterView />
     </div>
 </template>
 
@@ -8,6 +8,4 @@
 import { RouterView } from 'vue-router';
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -12,6 +12,7 @@ import querydetail from '@/views/querydetail.vue'
 import paramsdetail from '@/views/paramsdetail.vue'
 import propsdetail from '@/views/propsdetail.vue'
 import game2048 from '@/components/game2048.vue'
+import signup from '@/views/signup.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -33,8 +34,8 @@ const router = createRouter({
             redirect: '/game/2048',
             children: [
                 {
-                    path:'2048',
-                    component:game2048
+                    path: '2048',
+                    component: game2048
                 }
             ]
         },
@@ -43,10 +44,10 @@ const router = createRouter({
             path: '/tool',
             component: toolpage,
             redirect: '/tool/camera',
-            children:[
+            children: [
                 {
-                    path:'camera',
-                    component:camera
+                    path: 'camera',
+                    component: camera
                 }
             ]
         },
@@ -58,11 +59,15 @@ const router = createRouter({
             children: [
                 {
                     path: 'poemlist',
-                    component:poemlist
+                    component: poemlist
                 },
                 {
                     path: 'userdata',
-                    component:userdata
+                    component: userdata
+                },
+                {
+                    path: 'signup',
+                    component: signup
                 },
                 {
                     path: 'news',
@@ -89,7 +94,6 @@ const router = createRouter({
                         }
                     ]
                 },
-
             ]
         }
     ]

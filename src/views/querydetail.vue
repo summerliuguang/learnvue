@@ -121,6 +121,7 @@ let { query } = toRefs(route)
 .article-image img:hover {
     height: 105%;
 }
+
 @media screen and (max-width: 768px) {
     .article-container {
         width: 260px;

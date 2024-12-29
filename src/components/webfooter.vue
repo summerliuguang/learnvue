@@ -6,7 +6,7 @@
     </footer>
 </template>
 
-<script lang="ts" setup name='webfooter'> 
+<script lang="ts" setup name='webfooter'>
 </script>
 
 <style scoped>
@@ -29,10 +29,9 @@
     color: rgb(105, 105, 240);
 }
 
-.footer img{
+.footer img {
     width: 18px;
     margin-right: 8px;
     vertical-align: bottom;
 }
-
 </style>

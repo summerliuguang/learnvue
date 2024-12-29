@@ -24,7 +24,7 @@ let cameraRight = false;
 let stream: MediaStream | null = null;
 
 // 请求摄像头权限
-function requestCameraPermission(){
+function requestCameraPermission() {
   navigator.mediaDevices.getUserMedia({ video: true })
     .then(() => {
       cameraRight = true;
@@ -49,7 +49,7 @@ const getCameras = async () => {
       if (device.kind === 'videoinput') {
         const label = device.label || 'Unnamed Camera';
         console.log('摄像头设备:', device);
-        
+
         videoDevices.push({
           deviceId: device.deviceId,
           label,

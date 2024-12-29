@@ -9,7 +9,7 @@ export default function () {
         age: personStore.age
     })
 
-    function changeName( name = 'liuguang') {
+    function changeName(name = 'liuguang') {
         personStore.name = name
     }
 
@@ -18,8 +18,8 @@ export default function () {
     }
     function minusAge(year = 1) {
         personStore.age -= year
-        if (personStore.age <= 0 ) personStore.age = 0
+        if (personStore.age <= 0) personStore.age = 0
     }
 
-    return {person,addAge,minusAge,changeName}
+    return { person, addAge, minusAge, changeName }
 }

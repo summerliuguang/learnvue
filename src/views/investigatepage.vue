@@ -5,7 +5,7 @@
             <button @click="routeTo('/investigate/userdata')">个人信息</button>
             <button @click="routeTo('/investigate/poemlist')">古诗一言</button>
             <button @click="routeTo('/investigate/news')">新闻公告</button>
-
+            <button @click="routeTo('/investigate/signup')">登陆/注册</button>
         </div>
         <div class="investigatearea">
             <RouterView />
